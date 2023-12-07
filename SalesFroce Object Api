@@ -4,3 +4,24 @@ Step 1: System.debug(System.Url.getSalesforceBaseUrl());   // endpoind eg: https
          url/+services/apexrest/objectname
     
 Step 2: System.debug(System.UserInfo.getSessionId().Substring()); //Bearer token
+
+
+
+
+#To Access the Data From Another Org
+
+Salesforce org 1:
+   Connected app 
+    
+
+Salesforce org 2:
+  
+   auth provider
+   named credential
+    To get url of(org 1) : System.debug(System.Url.getSalesforceBaseUrl());
+   
+
+   
+ 1. we can access the data of org 1 from org 2 
+    also we can manipulate the data of org1 if we have an access.
+   
