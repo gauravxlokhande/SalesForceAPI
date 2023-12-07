@@ -1,7 +1,10 @@
 #To get the data of perticular Object
 
-Step 1: System.debug(System.Url.getSalesforceBaseUrl());   // endpoind eg: https://www.salesforce.com --> set in remotesitesetting
+Step 1: System.debug(System.Url.getSalesforceBaseUrl()); // endpoind eg: https://www.salesforce.com --> set in remotesitesetting
          url/+services/apexrest/objectname
+
+Step 1: My Domain
+
     
 Step 2: System.debug(System.UserInfo.getSessionId().Substring()); //Bearer token
 
