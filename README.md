@@ -90,3 +90,53 @@ export default class ApicallPage extends LightningElement {
       
 }
 ```
+
+
+# Call Api Without Apex Through JS
+
+## Html Code: 
+```
+<template>
+    <div>
+        <h1>Weather Information</h1>
+        <template if:true={weatherData}>
+            <div>
+                <p>Temperature: {weatherData.current.temperature}</p>
+                <!-- Add more properties as needed -->
+            </div>
+        </template>
+        <template if:false={weatherData}>
+            <p>Loading...</p>
+        </template>
+    </div>
+</template>
+```
+
+## JS Code:
+
+```
+import { LightningElement, track } from 'lwc';
+
+export default class WeatherComponent extends LightningElement {
+    @track weatherData;
+
+    connectedCallback() {
+        const endpoint = 'http://api.weatherstack.com/current?access_key=5353014c571e6f581faccf6881cdaefd&query=Amravati';
+
+        fetch(endpoint)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                this.weatherData = data;
+            })
+            .catch(error => {
+                console.error('Error fetching weather data:', error);
+            });
+    }
+}
+```
+
