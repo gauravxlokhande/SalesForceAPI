@@ -60,3 +60,29 @@ public class calldataobjectapi {
         return null;     }
 }
 ```
+
+
+
+```
+public class calldataobjectapi {
+    @AuraEnabled
+    public static String getCases() {
+        Http http = new Http();
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint('https://creative-shark-2j535e-dev-ed.trailblaze.my.salesforce.com/services/apexrest/Accounts');
+        req.setMethod('GET');
+        req.setHeader('Authorization', 'Bearer ' + '!AQUAQMFzH8y6zRejKOoxbgOwXPT5ZpNNTSFvcrToaVRd5KyzbyC5ZDkajjPznFiVrzFMf1kuNddm.pAae5g3Zk5kxKDVe1NV');
+
+            HttpResponse res = http.send(req);
+
+            if (res.getStatusCode() == 200) {
+                
+                System.debug(res.getBody());
+                
+                return res.getBody();
+            } else {
+                System.debug('HTTP request failed with status code: ' + res.getStatusCode());
+            }
+        return null;     }
+}
+```
