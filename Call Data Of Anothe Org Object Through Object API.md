@@ -38,23 +38,22 @@ global with sharing class CaseManager {
 
 ```
 OrgBApex.cls
-public class SalesforceConnect {
-    
-    public static String getCases() {
-        String endpoint = 'https://curious-goat-d8hj6v-dev-ed.trailblaze.my.salesforce.com/services/apexrest/Cases';  // org a my domain
-        String token = '!AQcAQLVY0p631frI0pSSYsFMdPjRv0TuuKKh6lXKogcsA6hiXWqsGJNPWNIhHUwk.SSsgHGt3tRuYqIfnLvvymw.KNGQHXLG'; // org a acces token
-
+public class calldataobjectapi {
+    @AuraEnabled
+    public static List<Account> getCases() {
         Http http = new Http();
         HttpRequest req = new HttpRequest();
-        req.setEndpoint(endpoint);
+        req.setEndpoint('https://creative-shark-2j535e-dev-ed.trailblaze.my.salesforce.com/services/apexrest/Accounts');
         req.setMethod('GET');
-        req.setHeader('Authorization', 'Bearer ' + token);
+        req.setHeader('Authorization', 'Bearer ' + '!AQUAQMFzH8y6zRejKOoxbgOwXPT5ZpNNTSFvcrToaVRd5KyzbyC5ZDkajjPznFiVrzFMf1kuNddm.pAae5g3Zk5kxKDVe1NV');
 
             HttpResponse res = http.send(req);
 
             if (res.getStatusCode() == 200) {
+                
                 System.debug(res.getBody());
-                return res.getBody();
+                
+                return (List<Account>)JSON.deserialize(res.getbody(), List<Account>.Class);
             } else {
                 System.debug('HTTP request failed with status code: ' + res.getStatusCode());
             }
