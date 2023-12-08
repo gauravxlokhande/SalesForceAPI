@@ -61,19 +61,3 @@ public class SalesforceConnect {
         return null;     }
 }
 ```
-
-
-# To Access the Data From Another Org Through Connected App.
-
-## Salesforce org 1:
-  Step1:  Connected app 
-    
-
-## Salesforce org 2:
-  
-   Step 1:  auth provider
-   Step 2: named credential
-   To get url of org 1 go to : My Domain
-
-## from above steps we can access the data of org 1 from org 2 also we can manipulate the data of org1 if we have an access.
-   
