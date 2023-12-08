@@ -85,3 +85,8 @@ public class calldataobjectapi {
         return null;     }
 }
 ```
+
+```
+Apex JSON Method:
+https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_class_System_Json.htm
+```
