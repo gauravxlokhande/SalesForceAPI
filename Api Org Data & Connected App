@@ -3,12 +3,14 @@
 Step 1: System.debug(System.Url.getSalesforceBaseUrl()); // endpoind eg: https://www.salesforce.com --> set in remotesitesetting
          url/+services/apexrest/objectname
 
-Step 1: My Domain
+
+Step 1: My Domain : https:// + curious-goat-d8hj6v-dev-ed.trailblaze.my.salesforce.com + /services/apexrest/Cases
 
     
 Step 2: System.debug(System.UserInfo.getSessionId().SubString(15)); //Bearer token
 
 
+-----------------------------------------------------------------------------------------------------------------------------
 
 
 #To Access the Data From Another Org
