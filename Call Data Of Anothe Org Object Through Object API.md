@@ -62,7 +62,6 @@ public class calldataobjectapi {
 ```
 
 
-
 ```
 public class calldataobjectapi {
     @AuraEnabled
