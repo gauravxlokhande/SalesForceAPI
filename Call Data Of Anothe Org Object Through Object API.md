@@ -53,7 +53,7 @@ public class calldataobjectapi {
                 
                 System.debug(res.getBody());
                 
-                return (List<Account>)JSON.deserialize(res.getbody(), List<Account>.Class);
+                return (List<Account>)JSON.deserialize(res.getbody(), List<Account>.Class); //use json.deserialize method for convert into apex object
             } else {
                 System.debug('HTTP request failed with status code: ' + res.getStatusCode());
             }
