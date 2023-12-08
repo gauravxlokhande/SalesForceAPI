@@ -1,5 +1,5 @@
 # 1
-## To get the data of perticular Object in POSTMAN: In Org A access data Through Session Id:
+# To get the data of perticular Object in POSTMAN: In Org A access data Through Session Id:
 ```
 Step 1: System.debug(System.Url.getSalesforceBaseUrl()); // endpoind eg: https://www.salesforce.com --> set in remotesitesetting
          url/+services/apexrest/objectname
@@ -33,7 +33,7 @@ global with sharing class CaseManager {
 </br>
 
 # 2
-## To get the data of perticular Object in Apex:   In org B access data Through Session Id:
+# To get the data of perticular Object in Apex:   In org B access data Through Session Id:
 ## by using org A session id we can access the data of Org A in  Org B but it valid only for this session and get expires after that session and we need new session id so we use connected app to overcome this issue.
 
 ```
