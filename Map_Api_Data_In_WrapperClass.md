@@ -61,3 +61,90 @@ public class WeatherDetailsClass {
 
 
 Note: the data provided by above method can directly accissable using data.city  through imparitive methods in javascript.
+
+
+## Sample Data
+```
+{
+  "index_name": "6141ea17-a69d-4713-b600-0a43c8fd9a6c",
+  "title": "Current daily price of various commodities from various markets (Mandi)",
+  "records": [
+    {
+      "state": "Bihar",
+      "district": "Darbhanga",
+      "market": "Bahadurpur (Ekmi Ghat)",
+      "commodity": "Onion",
+      "arrival_date": "17/12/2023",
+      "min_price": 3500,
+      "max_price": 3800
+    },
+    {
+      "state": "Punjab",
+      "district": "Amritsar",
+      "market": "Amritsar (India Gate)",
+      "commodity": "Potato",
+      "arrival_date": "16/12/2023",
+      "min_price": 3200,
+      "max_price": 3500
+    }
+  ]
+}
+```
+
+## Apex class for wrapping above data
+
+```
+public class WeatherDetailsClass {
+    @AuraEnabled
+    public static List<WeatherRecordWrapper> getWeatherDetails(String cityName){
+        //Frame the Endpoint URL
+        String apiKey = '579b464db66ec23bdd000001be46e8b8b04c4b746f8c908419d2c4e3';
+        String endpoint = 'https://api.data.gov.in/catalog/6141ea17-a69d-4713-b600-0a43c8fd9a6c?';
+        endpoint += 'api-key='+apiKey;
+        endpoint += '&format=json&filters%5Bstate%5D='+cityName;
+        system.debug('Endpoint URL=> '+endpoint);
+        
+        //Callout to Weather API
+        Http http = new Http();
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(endpoint);
+        req.setMethod('GET');
+        HttpResponse res = http.send(req);
+        system.debug('Response status=> '+res);
+        system.debug('Response body=> '+res.getBody());
+
+        // Parse and wrap the records
+        List<WeatherRecordWrapper> recordsList = new List<WeatherRecordWrapper>();
+        if(res.getStatusCode() == 200){
+            Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
+            List<Object> records = (List<Object>) responseMap.get('records');
+            
+            for (Object record : records) {
+                Map<String, Object> recordMap = (Map<String, Object>) record;
+                WeatherRecordWrapper recordWrapper = new WeatherRecordWrapper();
+                recordWrapper.state = (String) recordMap.get('state');
+                recordWrapper.district = (String) recordMap.get('district');
+                recordWrapper.market = (String) recordMap.get('market');
+                recordWrapper.commodity = (String) recordMap.get('commodity');
+                recordWrapper.arrivalDate = (String) recordMap.get('arrival_date');
+                recordWrapper.minPrice = (Decimal) recordMap.get('min_price');
+                recordWrapper.maxPrice = (Decimal) recordMap.get('max_price');
+                recordsList.add(recordWrapper);
+            }
+        }
+        system.debug('Records to return=> '+recordsList);
+        return recordsList;
+    }
+    
+    // Wrapper class for weather record
+    public class WeatherRecordWrapper {
+        @AuraEnabled public String state {get;set;}
+        @AuraEnabled public String district {get;set;}
+        @AuraEnabled public String market {get;set;}
+        @AuraEnabled public String commodity {get;set;}
+        @AuraEnabled public String arrivalDate {get;set;}
+        @AuraEnabled public Decimal minPrice {get;set;}
+        @AuraEnabled public Decimal maxPrice {get;set;}
+    }
+}
+```
