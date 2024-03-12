@@ -49,6 +49,7 @@ after save we get Callback url
 ```
 
 ## create Named Credentials
+<p>to create name credentials select "New Legacy"</p>
 ```
 Label : SalesforceorgAconnect
 Url: my Domain
