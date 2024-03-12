@@ -58,7 +58,7 @@ Default Scopes: refresh_token full
 
 ## Save Auth Provider
 ```
-after save we get Callback url
+after save we get Callback url add it in salesforce org A "Connected Application"
 ```
 
 ## create Named Credentials
