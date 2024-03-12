@@ -71,6 +71,7 @@ Url: my Domain
 Identity Type: Named Principal
 Authentication Protocol: OAuth 2.0
 Authentication Provider: Salesforce Org A
+scope : refresh_token full
 Start Authentication flow on save: checked
 ```
 
