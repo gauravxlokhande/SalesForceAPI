@@ -1,5 +1,42 @@
 # Map Api data in an Wrapper Class
 
+## Most Most Most Importent Note
+ for below responce:
+
+ 
+
+ 
+```
+{        // if see curly braces then take Map<String, Object> mapofobj = (Map<String, Object>) casthere;
+  "index_name": "6141ea17-a69d-4713-b600-0a43c8fd9a6c",
+  "title": "Current daily price of various commodities from various markets (Mandi)",
+  "records": [      // if see array containing multiple object take List<Object> listobj =(List<Object>) casthere;  now this array contains multiple object inside it. iterate over array and asign obj to map : for (Object obj: listobj) 
+
+    {                    // so here we see curlybrace use map   Map<String , Object> firstobj = (Map<String, Object>)obj;  then we are able to access the values now.
+      "state": "Bihar",
+      "district": "Darbhanga",
+      "market": "Bahadurpur (Ekmi Ghat)",
+      "commodity": "Onion",
+      "arrival_date": "17/12/2023",
+      "min_price": 3500,
+      "max_price": 3800
+    },
+    {
+      "state": "Punjab",
+      "district": "Amritsar",
+      "market": "Amritsar (India Gate)",
+      "commodity": "Potato",
+      "arrival_date": "16/12/2023",
+      "min_price": 3200,
+      "max_price": 3500
+    }
+  ]
+}
+```
+
+
+
+
 ## Map Api data in an Wrapper Class to reduce the complexity of acceccing data while accessing in javascript.
 
 ## In below format we getting the data from api:
