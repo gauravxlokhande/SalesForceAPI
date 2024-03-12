@@ -25,6 +25,20 @@ Selected OAuth Scopes:
 ## Save Connected App.
 
 
+## Expose Data From Org A for get accessible in org b
+
+```
+@RestResource(UrlMapping='/DataAvailable/*')
+Global class exposedata {
+
+    @httpget
+    global static List<Contact> getcontact(){
+        List<Contact> conList =[Select Id, FirstName From Contact];
+        return conList;
+    }
+}
+```
+
 
 # Salesforce Org B: access org A data in B
 
@@ -43,7 +57,6 @@ Default Scopes: refresh_token full
 ```
 
 ## Save Auth Provider
-
 ```
 after save we get Callback url
 ```
@@ -52,6 +65,7 @@ after save we get Callback url
 <p>to create name credentials select "New Legacy"</p>
 
 ```
+Create Named Creadential: New Legacy
 Label : SalesforceorgAconnect
 Url: my Domain
 Identity Type: Named Principal
@@ -61,17 +75,43 @@ Start Authentication flow on save: checked
 ```
 
 ## To Get Base Url OF Org A:
-go in org a and refer
+<p>Go in org A and go in my domain copy url like below.</p>
+
 ```
-https://github.com/gaurravlokhande/SalesForceAPI/blob/main/Call%20Data%20Of%20Anothe%20Org%20Object%20Through%20Object%20API.md#to-get-the-data-of-perticular-object-in-postman-in-org-a-access-data-through-session-id
+https://prepscart-dev-ed.develop.my.salesforce.com
 ```
+
 ##  Save
 ```
 login by entering org A username and pass
 ```
-#Done
+
+## Done
+
+
+ ## Consuming Data from org A and accessing in Org B:
+ 
+```
+public class calldataobjectapid {
+    @AuraEnabled
+    public static String getCases() {
+        Http http = new Http();
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint('callout:Prepscart_Named_Credentials/services/apexrest/DataAvailable');
+        req.setMethod('GET');
+            HttpResponse res = http.send(req);
+            if (res.getStatusCode() == 200) {
+                System.debug(res.getBody());
+                return res.getBody();
+            } else {
+                System.debug('HTTP request failed with status code: ' + res.getStatusCode());
+            }
+        return null;     
+    }
+}
+```
 
 ```
-req.setEndpoint('callout:SalesforceorgAconnect/services/apexrest/Cases'); // SalesforceorgAconnect is a named credentials
+req.setEndpoint('callout:Prepscart_Named_Credentials/services/apexrest/DataAvailable'); // SalesforceorgAconnect is a named credentials
 ```
 
