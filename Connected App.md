@@ -57,6 +57,12 @@ Authentication Protocol: OAuth 2.0
 Authentication Provider: Salesforce Org A
 Start Authentication flow on save: checked
 ```
+
+## To Get Base Url OF Org A:
+go in org a and refer
+```
+https://github.com/gaurravlokhande/SalesForceAPI/blob/main/Call%20Data%20Of%20Anothe%20Org%20Object%20Through%20Object%20API.md#to-get-the-data-of-perticular-object-in-postman-in-org-a-access-data-through-session-id
+```
 ##  Save
 ```
 login by entering org A username and pass
