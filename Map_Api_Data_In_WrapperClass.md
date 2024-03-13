@@ -188,7 +188,7 @@ public class WeatherDetailsClass {
 
 
 
-# Wrapper Class for Http GET callout
+# Wrapper Class for Http GET callout Without Using Constructor
 
 ```
 public class calldataobjectapid {
@@ -231,5 +231,56 @@ public class calldataobjectapid {
     
 }
 ```    
+
+
+
+
+ # Wrapper class for Http get with using Constructor
+
+```
+public class calldataobjectapid {
     
+    @AuraEnabled
+    public static List<ContactData> getCases() {
+        List<ContactData> contactList = new List<ContactData>();
+
+        try {
+            Http http = new Http();
+            HttpRequest req = new HttpRequest();
+            req.setEndpoint('callout:Prepscart_Named_Credentials/services/apexrest/DataAvailable');
+            req.setMethod('GET');
+            HttpResponse res = http.send(req);
+
+            if (res.getStatusCode() == 200) {
+                List<Object> objlist = (List<Object>) JSON.deserializeUntyped(res.getBody());
+                
+                for(Object obj : objlist) {
+                    Map<String, Object> datamap = (Map<String, Object>) obj;
+                    String contactId = String.valueOf(datamap.get('Id'));
+                    String firstName = String.valueOf(datamap.get('FirstName'));
+                    
+                    // Instantiate a ContactData object and add it to the list
+                    contactList.add(new ContactData(contactId, firstName));
+                }
+            } else {
+                System.debug('HTTP request failed with status code: ' + res.getStatusCode());
+            }
+        } catch (Exception ex) {
+            System.debug(ex.getMessage());
+        }
+
+        return contactList;
+    }
+
+    public class ContactData {
+        @AuraEnabled public String Id{get;set;}
+        @AuraEnabled public String FirstName{get;set;}
+        
+        // Constructor to initialize ContactData object
+        public ContactData(String id, String firstName){
+            this.Id = id;
+            this.FirstName = firstName;
+        }
+    }   
     
+```
