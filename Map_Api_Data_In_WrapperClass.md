@@ -185,3 +185,51 @@ public class WeatherDetailsClass {
     }
 }
 ```
+
+
+
+# Wrapper Class for Http GET callout
+
+```
+public class calldataobjectapid {
+    
+   @AuraEnabled
+    public static List<ContactData> getCases() {
+        List<ContactData> contactList = new List<ContactData>();
+
+        try {
+            Http http = new Http();
+            HttpRequest req = new HttpRequest();
+            req.setEndpoint('callout:Prepscart_Named_Credentials/services/apexrest/DataAvailable');
+            req.setMethod('GET');
+            HttpResponse res = http.send(req);
+
+            if (res.getStatusCode() == 200) {
+                List<Object> objlist =(List<Object>) JSON.deserializeUntyped(res.getBody());
+                
+                for(Object obj : objlist) {
+                    Map<String, Object> datamap = (Map<String, Object>) obj;
+                    ContactData dat = new ContactData();
+                    dat.Id = String.valueOf(datamap.get('Id'));
+                    dat.FirstName =String.valueOf(datamap.get('FirstName'));
+                    contactList.add(dat);
+                }
+            } else {
+                System.debug('HTTP request failed with status code: ' + res.getStatusCode());
+            }
+        } catch (Exception ex) {
+            System.debug(ex.getMessage());
+        }
+
+        return contactList;
+    }
+
+    public class ContactData {
+        @AuraEnabled public String Id{get;set;}
+        @AuraEnabled public String FirstName{get;set;}
+    }   
+    
+}
+```    
+    
+    
