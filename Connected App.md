@@ -48,6 +48,19 @@ global class exposeData {
         insert newCase;
         return newCase.Id;
     }
+
+
+   @HttpPost
+   global static String deleteCase(String caseId) {
+       
+    Case caseToDelete = [SELECT Id, Status FROM Case WHERE Id = :caseId LIMIT 1];
+       if(caseToDelete != null){
+             delete caseToDelete;
+            return 'case delete successfull';
+       }else{
+            return 'case delete unsuccessfull';
+       }
+ }
     
 }
 ```
@@ -142,7 +155,30 @@ public class calldataobjectapid {
     } else {
         System.debug('Failed to create case. HTTP status code: ' + res.getStatusCode());
     }
-  }       
+  }
+
+
+
+ @AuraEnabled
+      public static void deleteCases(String DeleteCase) {
+          
+          Http http = new Http();
+          HttpRequest req = new HttpRequest();
+           req.setEndpoint('callout:Prepscart_Named_Credentials/services/apexrest/DataAvailable');
+           req.setMethod('POST');
+           req.setHeader('Content-Type', 'application/json');
+              String bodyJson = '{"caseId": "' + DeleteCase + '"}';
+            req.setBody(bodyJson);
+          HttpResponse resp = http.send(req);
+          
+           if (resp.getStatusCode() == 200) {
+              System.debug('Case Deleted successfully. Response: ' + resp.getBody());
+            } else {
+              System.debug('Failed to create case. HTTP status code: ' + resp.getStatusCode());
+          }
+      }
+
+ 
 }
 ```
 
