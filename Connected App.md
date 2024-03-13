@@ -29,13 +29,26 @@ Selected OAuth Scopes:
 
 ```
 @RestResource(UrlMapping='/DataAvailable/*')
-Global class exposedata {
+global class exposeData {
 
-    @httpget
+    @HttpGet
     global static List<Contact> getcontact(){
         List<Contact> conList =[Select Id, FirstName From Contact];
         return conList;
     }
+
+    @HttpPost
+    global static ID createCase(String subject, String status, String origin, String priority) {
+        Case newCase = new Case(
+            Subject = subject,
+            Status = status,
+            Origin = origin,
+            Priority = priority
+        );
+        insert newCase;
+        return newCase.Id;
+    }
+    
 }
 ```
 
@@ -94,21 +107,42 @@ login by entering org A username and pass
  
 ```
 public class calldataobjectapid {
+    
     @AuraEnabled
     public static String getCases() {
-        Http http = new Http();
-        HttpRequest req = new HttpRequest();
-        req.setEndpoint('callout:Prepscart_Named_Credentials/services/apexrest/DataAvailable');
-        req.setMethod('GET');
+            Http http = new Http();
+            HttpRequest req = new HttpRequest();
+            req.setEndpoint('callout:Prepscart_Named_Credentials/services/apexrest/DataAvailable');
+            req.setMethod('GET');
             HttpResponse res = http.send(req);
             if (res.getStatusCode() == 200) {
                 System.debug(res.getBody());
                 return res.getBody();
             } else {
-                System.debug('HTTP request failed with status code: ' + res.getStatusCode());
+             System.debug('HTTP request failed with status code: ' + res.getStatusCode());
             }
-        return null;     
+        return null;      
     }
+
+    @AuraEnabled
+ public Static void createCases(String subject, String status, String origin, String Priority) {
+    Http http = new Http();
+    HttpRequest req = new HttpRequest();
+    req.setEndpoint('callout:Prepscart_Named_Credentials/services/apexrest/DataAvailable');
+    req.setMethod('POST');
+    req.setHeader('Content-Type', 'application/json');
+    
+    // Create a JSON string using the provided variables
+    String bodyJson = '{"subject": "' + subject + '", "status": "' + status + '", "origin": "' + origin + '", "priority": "' + Priority + '"}';
+    req.setBody(bodyJson);
+    
+    HttpResponse res = http.send(req);
+    if (res.getStatusCode() == 200) {
+        System.debug('Case created successfully. Response: ' + res.getBody());
+    } else {
+        System.debug('Failed to create case. HTTP status code: ' + res.getStatusCode());
+    }
+  }       
 }
 ```
 
