@@ -214,3 +214,6 @@ curl --request POST 'https://yourInstance.salesforce.com/services/data/v60.0/sob
     <BillingCity>New York</BillingCity>
 </Account>'
 ```
+<img width="1512" alt="Screenshot 2025-06-17 at 8 49 23 AM" src="https://github.com/user-attachments/assets/4fda76cd-43f7-4c75-b8be-839adaad989f" />
+
+
