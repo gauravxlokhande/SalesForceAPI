@@ -214,6 +214,12 @@ curl --request POST 'https://yourInstance.salesforce.com/services/data/v60.0/sob
     <BillingCity>New York</BillingCity>
 </Account>'
 ```
-<img width="1512" alt="Screenshot 2025-06-17 at 8 49 23 AM" src="https://github.com/user-attachments/assets/4fda76cd-43f7-4c75-b8be-839adaad989f" />
 
+## To get the Access token in postman:
+<img width="708" alt="Screenshot 2025-06-17 at 9 03 28 AM" src="https://github.com/user-attachments/assets/d6853bd1-ac52-42e8-a5d5-9421fc410ee4" />
 
+## ater getting access token in postman use below curl:
+```bash
+curl --request GET 'https://yourInstance.salesforce.com/services/data/v58.0/sobjects/Account/' \
+--header 'Authorization: Bearer YOUR_ACCESS_TOKEN'
+```
