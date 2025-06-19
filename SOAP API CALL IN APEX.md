@@ -56,9 +56,9 @@ public class WeatherResult {
 ```apex
 public class SoapWeatherService {
     
-    public static WeatherResult getWeatherByZip(String zip) {
+    public static WeatherResult getWeatherByZip(String zipCode) {
         // Safely escape any XML characters in ZIP (e.g. &, <, >)
-        String safeZip = zip.escapeXml();
+        String safeZip = zipCode.escapeXml();
 
         // Construct the SOAP XML body with escaped input
         String soapBody = '<?xml version="1.0" encoding="utf-8"?>' +
