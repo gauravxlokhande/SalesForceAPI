@@ -110,27 +110,19 @@ public class SoapWeatherService {
 
 ##  Sample SOAP Response (Success)
 ```
+<?xml version="1.0" encoding="utf-8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-   <soap:Body>
-      <GetCityWeatherByZIPResponse xmlns="http://www.webserviceX.NET">
-         <GetCityWeatherByZIPResult>
-            <Success>true</Success>
-            <ResponseText>City Found</ResponseText>
-            <State>NY</State>
-            <City>New York</City>
-            <WeatherStationCity>New York</WeatherStationCity>
-            <WeatherID>1</WeatherID>
-            <Description>Sunny</Description>
-            <Temperature>75 F (24 C)</Temperature>
-            <RelativeHumidity>50%</RelativeHumidity>
-            <Wind>10 mph</Wind>
-            <Pressure>1012 mb</Pressure>
-            <Visibility>10 miles</Visibility>
-            <WindChill />
-            <Remarks>Clear sky with bright sun</Remarks>
-         </GetCityWeatherByZIPResult>
-      </GetCityWeatherByZIPResponse>
-   </soap:Body>
+  <soap:Body>
+    <GetWeatherResponse xmlns="http://www.webserviceX.NET">
+      <GetWeatherResult>
+        <Success>true</Success>
+        <City>New York</City>
+        <State>NY</State>
+        <Temperature>75 F</Temperature>
+        <Description>Sunny</Description>
+      </GetWeatherResult>
+    </GetWeatherResponse>
+  </soap:Body>
 </soap:Envelope>
 ```
 
