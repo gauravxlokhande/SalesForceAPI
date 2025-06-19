@@ -6,12 +6,6 @@ This example demonstrates how to make a **SOAP callout to a weather API** from A
 
 ---
 
-## 📡 API Used
-
-**WebServiceX Weather by ZIP** (Legacy example)
-
-> ⚠️ *Note: This is for learning purposes. WebServiceX APIs are now deprecated — replace with a working SOAP weather API or mock it in tests.*
-
 ---
 
 ## 📨 SOAP Request Structure
