@@ -280,19 +280,6 @@ private class SoapWeatherServiceTest {
 
 ---
 
-## 🧠 Pro Tip: Escaping XML in Requests
-
-When building your SOAP request body in Apex, always use `.escapeXml()` for dynamic values:
-
-```apex
-String zip = '10001 & Co.';
-String escapedZip = zip.escapeXml(); // Results: "10001 &amp; Co."
-```
-
-This prevents XML injection and malformed payloads.
-
----
-
 ## 🧪 Output from Test Run (Debug Logs)
 
 ```plaintext
