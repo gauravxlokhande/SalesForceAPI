@@ -1,9 +1,3 @@
-* API Overview
-* Sample Request
-* Apex Code
-* How `escapeXml()` is used
-* Parsed Response
-
 ---
 
 # 🌤️ SOAP Weather API Integration with Apex (Salesforce)
